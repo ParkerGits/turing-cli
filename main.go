@@ -52,8 +52,10 @@ func main() {
 		// Remove a transition
 		if strings.HasPrefix(optionsResult, "Remove") {
 			promptRemove(fromToMap)
+			continue
 		}
 
+		// Insert a transition
 		fromIdx := promptFrom(states, acceptResult, rejectResult)
 		toIdx := promptTo(states, acceptResult, rejectResult)
 
@@ -308,6 +310,7 @@ func insertTransition(fromToMap map[string][]Transition, from, to, on, write, di
 	for _, transition := range existingTransitions {
 		if transition.On == on {
 			fmt.Printf("Duplicate transition from state %s on input %s.\n", from, on)
+			return
 		}
 	}
 
